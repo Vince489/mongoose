@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vault Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Added inline CSS for a simple design */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: #444;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    nav button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    nav button:hover {
+      background-color: #0056b3;
+    }
+    .content-section {
+      display: none;
+    }
+    .content-section:not(.hidden) {
+      display: block;
+    }
+    #vaultData, #accountsData, #transactionsData, #searchResults {
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    input[type="text"] {
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: calc(100% - 110px);
+      margin-right: 10px;
+    }
+    button {
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    .results-container {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .result {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .result h3 {
+    margin-top: 0;
+  }
+
+  .result table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .result table th,
+  .result table td {
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .result table th {
+    background: #f4f4f4;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Vault Dashboard</h1>
+      <nav>
+        <button onclick="showSection('vault')">Vault Overview</button>
+        <button onclick="showSection('accounts')">Accounts</button>
+        <button onclick="showSection('transactions')">Transactions</button>
+        <button onclick="showSection('search')">Search</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="vault" class="content-section">
+        <h2>Vault Overview</h2>
+        <div id="vaultData">Loading vault data...</div>
+      </section>
+
+      <section id="accounts" class="content-section hidden">
+        <h2>Accounts</h2>
+        <div id="accountsData">Loading accounts...</div>
+      </section>
+
+      <section id="transactions" class="content-section hidden">
+        <h2>Recent Transactions</h2>
+        <div id="transactionsData">Loading transactions...</div>
+      </section>
+
+      <section id="search" class="content-section hidden">
+        <h2>Search</h2>
+        <input type="text" id="searchInput" placeholder="Search by account ID, transaction ID, or allocation type">
+        <button id="searchButton">Search</button>
+        <div id="searchResults" class="results-container"></div>
+      </section>
+      
+    </main>
+  </div>
+
+  <script>
+    // JS for switching sections and loading data
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchVaultData();
+      fetchAccounts();
+      fetchTransactions();
+    });
+
+    function showSection(sectionId) {
+      document.querySelectorAll(".content-section").forEach(section => {
+        section.classList.add("hidden");
+      });
+      document.getElementById(sectionId).classList.remove("hidden");
+    }
+  </script>
+  <script src="scripts.js"></script>
+</body>
+</html>
